@@ -1,0 +1,53 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  position: fixed;
+  top: 0px;
+  background-color: gainsboro;
+  z-index: 9999;
+}
+
+.list-item > Button {
+  text-decoration: none;
+
+  padding: 2px 12px;
+  margin: 0 20px;
+}
+
+/* .list-item > Button:hover {
+  background-color: #13c1ac;
+  color: white;
+} */
+
+ul.list {
+  list-style: none;
+  font-size: 15px;
+}
+
+h4 {
+  display: block;
+  font-size: 25px;
+}
+
+/* .greet-user {
+  display: flex;
+  position: absolute;
+  left: 300px;
+  font-size: 25px;
+} */
+
+/* .greet-user-p {
+  margin-left: 20px;
+  color: #13c1ac;
+} */
+
+/* .close-button {
+  border-radius: 8px;
+  background-color: red;
+  font-size: 20px;
+  color: white;
+} */
