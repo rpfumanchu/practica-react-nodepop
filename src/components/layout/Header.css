@@ -1,4 +1,4 @@
-.navbar {
+.header-navbar {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -11,9 +11,8 @@
   z-index: 9999;
 }
 
-.list-item > Button {
+.navbar-list-item > button {
   text-decoration: none;
-
   padding: 2px 12px;
   margin: 0 20px;
 }
@@ -28,9 +27,29 @@ ul.list {
   font-size: 15px;
 }
 
-h4 {
+.navbar-h4 {
   display: block;
   font-size: 25px;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #13c1ac;
+  color: black;
+  position: relative;
+  top: 60px;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+  padding: 5px;
+  border-radius: 15px;
 }
 
 /* .greet-user {
