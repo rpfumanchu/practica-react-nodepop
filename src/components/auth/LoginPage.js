@@ -5,7 +5,7 @@ import "./LoginPage.css";
 import Layout from "../layout/Layout";
 
 //DONE Loguear con email y password
-function LoginPage({ onLogin }) {
+function LoginPage({ onLogin, ...rest }) {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -29,7 +29,7 @@ function LoginPage({ onLogin }) {
   const buttonDisabled = !credentials.email || !credentials.password;
 
   return (
-    <Layout title="Login Page">
+    <Layout title="Login Page" {...rest}>
       <div>
         <form onSubmit={handleSubmit} className="container-form">
           <label className="form-label">Email</label>

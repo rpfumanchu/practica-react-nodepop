@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import LoginPage from "./components/auth/LoginPage";
-import Layout from "./components/layout/Layout";
+//import Layout from "./components/layout/Layout";
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = useState(isInitiallyLogged);
@@ -16,7 +16,12 @@ function App({ isInitiallyLogged }) {
 
   return (
     <div className="App">
-      <LoginPage onLogin={handleLogin} />
+      {/* <Layout onLogout={handleLogout} isLogged={isLogged} /> */}
+      <LoginPage
+        onLogout={handleLogout}
+        isLogged={isLogged}
+        onLogin={handleLogin}
+      />
     </div>
   );
 }
