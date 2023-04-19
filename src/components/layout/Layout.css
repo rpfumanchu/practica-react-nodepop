@@ -16,8 +16,9 @@
   display: flex;
   justify-content: center;
   position: relative;
-  top: 65px;
-  padding: 0 15px;
+  top: 85px;
+  padding: 10px 15px;
+  font-size: 25px;
 }
 
 .layout-footer {

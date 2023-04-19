@@ -1,0 +1,24 @@
+.ad-container {
+  width: 100%;
+  margin: 120px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px 20px 10px;
+  gap: 10px;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid #13c1ac;
+  background-color: whitesmoke;
+}
+
+.ad-container .ad-list {
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px 10px 20px 10px;
+  border-radius: 5px;
+  font-size: 21px;
+  border: 2px solid #13c1ac;
+  background-color: white;
+}

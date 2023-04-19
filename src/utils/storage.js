@@ -1,4 +1,4 @@
-//NOTE Metodos para
+//NOTE Metodos para tener las llamadas a localstorage centralizadas
 const storage = {
   get(key) {
     const value = localStorage.getItem(key);

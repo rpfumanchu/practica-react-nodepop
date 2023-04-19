@@ -1,17 +1,16 @@
 .container-form {
   width: 100%;
   max-width: 500px;
-  margin: 80px auto;
+  margin: 120px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  padding: 20px 10px 20px 10px;
+  padding: 30px 10px 20px 10px;
   gap: 10px;
   border-radius: 10px;
   text-align: center;
-  border: 2px solid gainsboro;
+  border: 2px solid #13c1ac;
   background-color: whitesmoke;
 }
 
