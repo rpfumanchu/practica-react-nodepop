@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import "./Page404.css";
 
 const Page404 = () => {
   return (
     <div className="body-style">
-      <section class="notFound">
-        <div class="img">
+      <section className="notFound">
+        <div className="img">
           <img
             src="https://assets.codepen.io/5647096/backToTheHomepage.png"
             alt="Back to the Homepage"
@@ -14,12 +15,15 @@ const Page404 = () => {
             alt="El Delorean, El Doc y Marti McFly"
           />
         </div>
-        <div class="text">
+        <div className="text">
           <h1>404</h1>
-          <h2>PAGE NOT FOUND</h2>
+          <h2>PAGE</h2>
+          <h2>NOT</h2>
+          <h2>FOUND</h2>
           <h3>BACK TO HOME?</h3>
-          {/* <a href="#" class="yes">YES</a>
-        <a href="https://www.youtube.com/watch?v=G3AfIvJBcGo">NO</a> */}
+          <Link className="yes" to="/">
+            Yes
+          </Link>
         </div>
       </section>
     </div>

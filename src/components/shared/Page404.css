@@ -28,9 +28,11 @@ section.notFound h2 {
   font-size: 50px;
 }
 
-section.notFound h1,
+section.notFound,
+h1,
 h2,
 h3 {
+  padding: 20px;
   margin-bottom: 40px;
 }
 

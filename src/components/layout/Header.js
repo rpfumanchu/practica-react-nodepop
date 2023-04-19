@@ -3,6 +3,7 @@ import Button from "../shared/Button";
 import "./Header.css";
 import { ReactComponent as Icon } from "../../assets/nodepop.svg";
 import { logout } from "../auth/service";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = ({ className, isLogged, onLogout }) => {
   const handleLogoutClick = async () => {
@@ -13,9 +14,12 @@ const Header = ({ className, isLogged, onLogout }) => {
   return (
     <header>
       <nav className={classNames("header-navbar", className)}>
-        <h4 className="navbar-h4">NodePop</h4>
+        <Link to="/">
+          <h4 className="navbar-h4">NodePop</h4>
+        </Link>
         <ul className="navbar-list">
           <li className="navbar-list-item">
+            <NavLink to="/api/v1/adverts/:adId">Detail</NavLink>
             {isLogged ? (
               <Button onClick={handleLogoutClick} variant="primary2">
                 Logout
