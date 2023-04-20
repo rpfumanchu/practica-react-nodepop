@@ -1,12 +1,11 @@
 .ad-container {
   width: 100%;
-  margin: 120px auto;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px 10px 20px 10px;
-  gap: 10px;
   border-radius: 10px;
   text-align: center;
   border: 2px solid #13c1ac;
@@ -15,10 +14,24 @@
 
 .ad-container .ad-list {
   width: 100%;
-  margin: 20px auto;
-  padding: 20px 10px 20px 10px;
+  display: flex;
+  justify-content: center;
+
   border-radius: 5px;
   font-size: 21px;
-  border: 2px solid #13c1ac;
-  background-color: white;
+}
+
+.ad-name {
+  padding: 0 10px;
+}
+
+.ad-state {
+  padding: 0 10px;
+}
+
+.ad-price {
+  padding: 0 10px;
+}
+.ad-tags {
+  padding: 0 10px;
 }

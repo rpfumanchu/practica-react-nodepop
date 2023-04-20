@@ -19,7 +19,7 @@ const Header = ({ className, isLogged, onLogout }) => {
         </Link>
         <ul className="navbar-list">
           <li className="navbar-list-item">
-            <NavLink to="/api/v1/adverts/:adId">Detail</NavLink>
+            <NavLink to="/api/v1/adverts/new">New</NavLink>
             {isLogged ? (
               <Button onClick={handleLogoutClick} variant="primary2">
                 Logout
@@ -32,7 +32,7 @@ const Header = ({ className, isLogged, onLogout }) => {
       </nav>
       <div className="title">
         <Icon className="logo" />
-        <h1>Práctica NodePop</h1>
+        <h1 className="title-h1">Práctica NodePop</h1>
         <Icon className="logo" />
       </div>
     </header>

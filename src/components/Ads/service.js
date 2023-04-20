@@ -7,3 +7,13 @@ export const getAds = () => {
   //const url = { adsUrl };
   return client.get(adsUrl);
 };
+
+// export const getAd = adsId => {
+//   const url = `${adsUrl}/${adsId}`;
+//   return client.get(url);
+// };
+
+export const getAd = adId => {
+  const url = `${adsUrl}/${adId}`;
+  return client.get(url);
+};

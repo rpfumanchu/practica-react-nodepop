@@ -1,6 +1,8 @@
 .layout-header {
   border-bottom-width: 1px;
   height: 64px;
+  display: flex;
+  align-items: center;
 }
 
 .layout-main {
@@ -13,18 +15,17 @@
 
 .layout-title {
   border-bottom-width: 1px;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  top: 85px;
-  padding: 10px 15px;
-  font-size: 25px;
+  position: sticky;
+  /* top: 85px;
+  padding: 10px 15px; */
+  font-size: 22px;
 }
 
 .layout-footer {
   width: 100%;
   display: flex;
   border-top-width: 1px;
+  position: sticky;
 }
 
 .layout-header,
