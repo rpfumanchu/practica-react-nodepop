@@ -3,9 +3,12 @@ import Button from "../shared/Button";
 import { login } from "./service";
 import "./LoginPage.css";
 import Layout from "../layout/Layout";
+import { useLocation, useNavigate } from "react-router-dom";
 
 //DONE Loguear con email y password
 function LoginPage({ onLogin, ...rest }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -17,6 +20,11 @@ function LoginPage({ onLogin, ...rest }) {
 
     //NOTE ahora estoy logueado
     onLogin();
+
+    //NOTE Redirigir al nombre de la ruta o a home
+    const to = location.state?.from?.pathname || "/";
+
+    navigate(to);
   };
 
   const handleChange = event => {

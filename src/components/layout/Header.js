@@ -20,12 +20,17 @@ const Header = ({ className, isLogged, onLogout }) => {
         <ul className="navbar-list">
           <li className="navbar-list-item">
             <NavLink to="/api/v1/adverts/new">New</NavLink>
+            <NavLink to="/api/v1/adverts" end>
+              Latest Ad
+            </NavLink>
             {isLogged ? (
               <Button onClick={handleLogoutClick} variant="primary2">
                 Logout
               </Button>
             ) : (
-              <Button variant="primary">Login</Button>
+              <Button as={Link} variant="primary" to="/api/auth/login">
+                Login
+              </Button>
             )}
           </li>
         </ul>

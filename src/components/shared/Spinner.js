@@ -1,13 +1,13 @@
 import "./Spinner.css";
 
-const Spiner = message => {
+const Spiner = ({ message, ...props }) => {
   return (
-    <div class="spinner">
-      <div class="cargando">
-        <div class="pelotas"></div>
-        <div class="pelotas"></div>
-        <div class="pelotas"></div>
-        <span class="texto-cargando">${message}</span>
+    <div className="spinner" {...props}>
+      <div className="cargando">
+        <div className="pelotas"></div>
+        <div className="pelotas"></div>
+        <div className="pelotas"></div>
+        <span className="texto-cargando">{message}</span>
       </div>
     </div>
   );

@@ -6,6 +6,8 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Page404 from "../src/components/shared/Page404";
 import AdNew from "./components/Ads/AdNew";
 import AdDetail from "./components/Ads/AdDetail";
+import RequireAuth from "./components/auth/RequireAuth";
+import HomePage from "./components/Ads/HomePage";
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = useState(isInitiallyLogged);
@@ -21,9 +23,14 @@ function App({ isInitiallyLogged }) {
   return (
     <div className="App">
       <Routes>
+        <Route path="/api/v1/adverts/home" element={<HomePage />} />
         <Route
           path="/api/v1/adverts"
-          element={<AdsPage onLogout={handleLogout} isLogged={isLogged} />}
+          element={
+            <RequireAuth>
+              <AdsPage onLogout={handleLogout} isLogged={isLogged} />
+            </RequireAuth>
+          }
         />
         <Route
           path="/api/auth/login"
@@ -35,16 +42,25 @@ function App({ isInitiallyLogged }) {
             />
           }
         />
+
         <Route
           path="/api/v1/adverts/new"
-          element={<AdNew onLogout={handleLogout} isLogged={isLogged} />}
+          element={
+            <RequireAuth>
+              <AdNew onLogout={handleLogout} isLogged={isLogged} />
+            </RequireAuth>
+          }
         />
         <Route
           path="/api/v1/adverts/:id"
-          element={<AdDetail onLogout={handleLogout} isLogged={isLogged} />}
+          element={
+            <RequireAuth>
+              <AdDetail onLogout={handleLogout} isLogged={isLogged} />
+            </RequireAuth>
+          }
         />
 
-        <Route path="/" element={<Navigate to="/api/v1/adverts" />} />
+        <Route path="/" element={<Navigate to="/api/v1/adverts/home" />} />
         <Route path="/404" element={<Page404 />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
