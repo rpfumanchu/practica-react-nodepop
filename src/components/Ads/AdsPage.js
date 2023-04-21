@@ -18,7 +18,7 @@ const AdsPage = props => {
 
   return (
     <Layout title="Que quieres hacer..." {...props}>
-      <div>
+      <div className="ad-container">
         <ul>
           {ads.map(ad => (
             <li key={ad.id}>

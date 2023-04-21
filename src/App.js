@@ -4,8 +4,8 @@ import LoginPage from "./components/auth/LoginPage";
 import AdsPage from "./components/Ads/AdsPage";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Page404 from "../src/components/shared/Page404";
-import AdDetailPage from "./components/Ads/DrawAd";
 import AdNew from "./components/Ads/AdNew";
+import AdDetail from "./components/Ads/AdDetail";
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = useState(isInitiallyLogged);
@@ -41,7 +41,7 @@ function App({ isInitiallyLogged }) {
         />
         <Route
           path="/api/v1/adverts/:id"
-          element={<AdDetailPage onLogout={handleLogout} isLogged={isLogged} />}
+          element={<AdDetail onLogout={handleLogout} isLogged={isLogged} />}
         />
 
         <Route path="/" element={<Navigate to="/api/v1/adverts" />} />
