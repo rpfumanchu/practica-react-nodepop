@@ -5,17 +5,21 @@ import "./LoginPage.css";
 import Layout from "../layout/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
 
-//DONE Loguear con email y password
+//DONE Loguear con email y password y un checkbox para dar la opcion de persistir el token
+
 function LoginPage({ onLogin, ...rest }) {
   const navigate = useNavigate();
   const location = useLocation();
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
+    rememberMe: false,
   });
 
   const handleSubmit = async event => {
     event.preventDefault();
+
     await login(credentials);
 
     //NOTE ahora estoy logueado
@@ -49,7 +53,6 @@ function LoginPage({ onLogin, ...rest }) {
             value={credentials.email}
             required
           />
-
           <label className="form-label">Password</label>
           <input
             className="form-input"
@@ -59,6 +62,15 @@ function LoginPage({ onLogin, ...rest }) {
             value={credentials.password}
             required
           />
+          <label>
+            Guardar sesiòn
+            <input
+              type="checkbox"
+              name="rememberMe"
+              value={credentials.rememberMe}
+              onChange={handleChange}
+            />
+          </label>
           <Button
             type="submit"
             variant="primary"

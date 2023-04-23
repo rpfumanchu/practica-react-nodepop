@@ -1,9 +1,14 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+
 //NOTE Para mi la propiedad children hace menciòn al elemento que esta dentro del tag
 
+//DONE Funcion que uso para recubrir un componente si es requerido tener autorizaciòn, le paso un objeto location a traves de la propiedad state para saber de que ruta vengo
+
 const RequireAuth = ({ isLogged, children }) => {
+  const location = useLocation();
+
   if (!isLogged) {
-    return <Navigate to="/api/auth/login" />;
+    return <Navigate to="/api/auth/login" state={{ from: location }} />;
   }
   return children;
 };

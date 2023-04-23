@@ -9,8 +9,8 @@
 }
 
 .ad-detail .ad {
-  padding: 20px 0px 20px 0px;
-  border: 2px solid #13c1ac;
+  padding: 20px 10px 40px 10px;
+  border: 2px solid var(--main-color);
   background-color: white;
 }
 
@@ -49,21 +49,4 @@
   padding: 8px 12px;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-.modifyAd-button {
-  text-decoration: none;
-  background-color: #13c1ac;
-  border-radius: 5px;
-  font-size: 23px;
-  color: white;
-  border: 0;
-  padding: 8px 12px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#updateAd {
-  background-color: #13c1ac;
-  color: white;
 }

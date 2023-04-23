@@ -23,11 +23,14 @@ function App({ isInitiallyLogged }) {
   return (
     <div className="App">
       <Routes>
-        <Route path="/api/v1/adverts/home" element={<HomePage />} />
+        <Route
+          path="/api/v1/adverts/home"
+          element={<HomePage onLogout={handleLogout} isLogged={isLogged} />}
+        />
         <Route
           path="/api/v1/adverts"
           element={
-            <RequireAuth>
+            <RequireAuth isLogged={isLogged}>
               <AdsPage onLogout={handleLogout} isLogged={isLogged} />
             </RequireAuth>
           }
@@ -42,11 +45,10 @@ function App({ isInitiallyLogged }) {
             />
           }
         />
-
         <Route
           path="/api/v1/adverts/new"
           element={
-            <RequireAuth>
+            <RequireAuth isLogged={isLogged}>
               <AdNew onLogout={handleLogout} isLogged={isLogged} />
             </RequireAuth>
           }
@@ -54,7 +56,7 @@ function App({ isInitiallyLogged }) {
         <Route
           path="/api/v1/adverts/:id"
           element={
-            <RequireAuth>
+            <RequireAuth isLogged={isLogged}>
               <AdDetail onLogout={handleLogout} isLogged={isLogged} />
             </RequireAuth>
           }

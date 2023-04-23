@@ -38,7 +38,7 @@ ul.list {
   text-align: center;
   align-items: center;
   margin-bottom: 10px;
-  background-color: #13c1ac;
+  background-color: var(--main-color);
   color: black;
   position: relative;
   top: 60px;

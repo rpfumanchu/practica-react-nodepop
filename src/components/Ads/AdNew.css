@@ -1,13 +1,8 @@
 .container-form {
   width: 100%;
-  max-width: 500px;
-  margin: 120px auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 30px 10px 20px 10px;
-  gap: 10px;
+  padding: 20px 10px 20px 10px;
   border-radius: 10px;
   text-align: center;
   border: 2px solid var(--main-color);
@@ -15,7 +10,11 @@
 }
 
 .container-form .form-label {
-  font-size: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  justify-content: center;
+  font-size: 30px;
   margin-bottom: 10px;
 }
 
@@ -31,12 +30,11 @@
   border: 3px solid gainsboro;
 }
 
-/* .container-form .form-input + small {
+.container-form .form-input + small {
   color: grey;
-} */
+}
 
 .button {
-  display: block;
   background-color: #578d57;
   border-radius: 5px;
   font-size: 23px;
