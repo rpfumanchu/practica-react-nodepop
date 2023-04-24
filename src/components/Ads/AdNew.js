@@ -13,8 +13,10 @@ const AdNew = ({ ...props }) => {
     sale: Boolean,
     price: 0,
     tags: [],
-    photo: [],
+    //photo: null,
   });
+
+  const [photo, setPhoto] = useState(null);
 
   const handleChange = event => {
     setFormData({
@@ -23,25 +25,38 @@ const AdNew = ({ ...props }) => {
     });
     console.log("text", { formData });
   };
+  const handleChangeInputFlile = e => {
+    setPhoto({ ...photo, photo: e.target.files[0] });
+
+    //   if (name === "photo") {
+    //     setFormData({ ...formData, [name]: value.e.target.files[0] });
+    //   } else if (name === "price") {
+    //     setFormData({ ...formData, [name]: parseFloat(value) });
+    //   } else if (name === "tags") {
+    //     setFormData({ ...formData, [name]: value.split(",") });
+    //   } else {
+    //     setFormData({ ...formData, [name]: value });
+    //   }
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
     setIsLoading(true);
     const adNew = new FormData();
 
-    // adNew.append("name", formData.name);
-    // adNew.append("sale", formData.sale);
-    // adNew.append("price", formData.price);
-    // adNew.append("tags", formData.tags);
-    //adNew.append("photo", formData.photo);
+    adNew.append("name", formData.name);
+    adNew.append("sale", formData.sale);
+    adNew.append("price", formData.price);
+    adNew.append("tags", formData.tags);
+    adNew.append("photo", photo.photo);
 
-    for (let key in formData) {
-      adNew.append(key, formData[key]);
-    }
+    // for (let key in formData) {
+    //   adNew.append(key, formData[key]);
+    // }
 
     const ad = await getForm(adNew);
     setIsLoading(false);
-    navigate(`/api/v1/adverts${ad.id}`);
+    //navigate(`/api/v1/adverts${ad.id}`);
     console.log(ad);
   };
 
@@ -111,9 +126,9 @@ const AdNew = ({ ...props }) => {
           name="img"
           id="img"
           accept="image/*"
-          value={formData.photo}
-          onChange={e => setFormData({ ...formData, photo: e.target.files[0] })}
-          //onChange={e => setFormData({ photo: e.target.files[0] })}
+          //value={formData.photo}
+          //onChange={e => setFormData({ ...formData, photo: e.target.files[0] })}
+          onChange={handleChangeInputFlile}
           placeholder="https://example.com"
           pattern="https://.*"
           size="30"

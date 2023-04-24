@@ -33,7 +33,17 @@ const AdDetail = props => {
               Estado: {ad.sale === true ? "Venta" : "Compra"}
             </span>
             <span className="text">{ad.price} Euros</span>
-            <DefaultPhoto className="img" />
+            <span className="img">
+              {ad.photo === null ? (
+                <DefaultPhoto className="img" />
+              ) : (
+                <img
+                  className="img"
+                  src={ad.photo}
+                  alt="imagenes anuncios"></img>
+              )}
+            </span>
+            {/* <DefaultPhoto className="img" /> */}
             {/* <span>{(ad.photo = adStatusImage())}</span> */}
             {/* <p class="text">${ad.stateuse}</p>
             <p class="text">${ad.description}</p> */}
