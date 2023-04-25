@@ -22,6 +22,11 @@ export const getForm = form => {
   return client.postForm(adsUrl, form, config);
 };
 
+export const getTags = () => {
+  const url = `${adsUrl}/tags`;
+  return client.get(url);
+};
+
 // var bodyFormData = new FormData();
 
 // const element = document.getElementById("image");

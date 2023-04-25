@@ -4,6 +4,7 @@ import { login } from "./service";
 import "./LoginPage.css";
 import Layout from "../layout/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
+import Spiner from "../shared/Spinner";
 
 //DONE Loguear con email y password y un checkbox para dar la opcion de persistir el token
 
