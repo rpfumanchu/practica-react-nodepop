@@ -19,12 +19,17 @@ export const getForm = form => {
     },
   };
 
-  return client.postForm(adsUrl, form, config);
+  return client.post(adsUrl, form, config);
 };
 
 export const getTags = () => {
   const url = `${adsUrl}/tags`;
   return client.get(url);
+};
+
+export const deleteAd = id => {
+  const url = `${adsUrl}/${id}`;
+  return client.delete(url);
 };
 
 // var bodyFormData = new FormData();

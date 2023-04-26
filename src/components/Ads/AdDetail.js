@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAd } from "./service";
+import { getAd, deleteAd } from "./service";
 import Layout from "../layout/Layout";
 import "./AdsPage.css";
 import "./AdDetail.css";
 import DefaultPhoto from "../shared/DefaultPhoto";
+import Button from "../shared/Button";
+import Modal from "../shared/modal/Modal";
 
 const AdDetail = props => {
   const params = useParams();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [ad, setAd] = useState(null);
+  const [deleteAdId, setDeleteAdId] = useState(null);
+  const [showModal, setShowModal] = useState(true);
 
   useEffect(() => {
     getAd(params.id)
@@ -22,6 +26,21 @@ const AdDetail = props => {
         setError(error);
       });
   }, [params.id, navigate]);
+
+  const handleShowModalconfirm = async event => {
+    const removeAd = await deleteAd(params.id);
+    setDeleteAdId(removeAd);
+    navigate("/api/v1/adverts");
+    console.log(deleteAdId);
+  };
+
+  const handleShowModalCancel = () => {
+    setShowModal(true);
+  };
+
+  const handleButton = () => {
+    setShowModal(false);
+  };
 
   return (
     <Layout title="Detalle del anuncio" {...props}>
@@ -48,6 +67,26 @@ const AdDetail = props => {
             {/* <p class="text">${ad.stateuse}</p>
             <p class="text">${ad.description}</p> */}
             <span className="span">{ad.tags}</span>
+
+            {showModal ? (
+              <Button
+                variant="primary2"
+                width="button-form"
+                onClick={handleButton}
+                // disabled={buttonDisabled}>
+              >
+                Borrar
+              </Button>
+            ) : (
+              <Modal
+                //style={{ display: showModal ? "flex" : "none" }}
+                // show={showModal}
+                // onHide={handleShowModalCancel}
+                message="¿Estas seguro? "
+                onConfirm={handleShowModalconfirm}
+                onCancel={handleShowModalCancel}
+              />
+            )}
           </div>
         </div>
       )}

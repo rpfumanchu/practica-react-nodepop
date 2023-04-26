@@ -19,18 +19,6 @@ const AdNew = ({ ...props }) => {
 
   const [photo, setPhoto] = useState(null);
 
-  // const handleChange = event => {
-  //   const { name, value } = event.target;
-  //   if (name === "photo") {
-  //     setFormData({ ...formData, [name]: event.target.files[0] });
-  //   } else if (name === "price") {
-  //     setFormData({ ...formData, [name]: parseFloat(value) });
-  //   } else if (name === "tags") {
-  //     setFormData({ ...formData, [name]: value.split(",") });
-  //   } else {
-  //     setFormData({ ...formData, [name]: value });
-  //   }
-  // };
   const handleSelectChange = event => {
     const options = event.target.options;
     const selectedTags = [];
@@ -159,7 +147,7 @@ const AdNew = ({ ...props }) => {
             required
             multiple
             onChange={handleSelectChange}>
-            <option value="">Seleccionar etiqueta...</option>
+            <option value="">Seleccionar tags...</option>
             <option value="lifestyle">Lifestyle</option>
             <option value="mobile">Mobile</option>
             <option value="motor">Motor</option>
