@@ -1,11 +1,11 @@
-import Layout from "../layout/Layout";
-import { getAds } from "./service";
+import Layout from "../../layout/Layout";
+import { getAds } from "../service";
 import "./AdsPage.css";
 import { Link } from "react-router-dom";
-import DrawAd from "./DrawAd";
+import DrawAd from "../DrawAd";
 import { useEffect, useState } from "react";
-import Spiner from "../shared/Spinner";
-import EmptyAdList from "./EmptyAdList";
+import Spiner from "../../shared/spinner/Spinner";
+import EmptyAdList from "../emptyAdList/EmptyAdList";
 
 const AdsPage = props => {
   const [isLoading, setIsLoading] = useState(true);

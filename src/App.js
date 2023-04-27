@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./App.css";
 import LoginPage from "./components/auth/LoginPage";
-import AdsPage from "./components/Ads/AdsPage";
+import AdsPage from "./components/Ads/adsPage/AdsPage";
 import { Route, Routes, Navigate } from "react-router-dom";
-import Page404 from "../src/components/shared/Page404";
-import AdNew from "./components/Ads/AdNew";
-import AdDetail from "./components/Ads/AdDetail";
+import Page404 from "./components/shared/page404/Page404";
+import AdNew from "./components/Ads/adNew/AdNew";
+import AdDetail from "./components/Ads/adDetail/AdDetail";
 import RequireAuth from "./components/auth/RequireAuth";
 import HomePage from "./components/Ads/HomePage";
 

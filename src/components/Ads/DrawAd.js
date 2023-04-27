@@ -1,4 +1,4 @@
-import "./AdDetail.css";
+import "../Ads/adDetail/AdDetail.css";
 
 const DrawAd = ad => {
   return (

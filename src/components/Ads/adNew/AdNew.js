@@ -1,10 +1,12 @@
-import Layout from "../layout/Layout";
+import Layout from "../../layout/Layout";
 import "./AdNew.css";
-import Button from "../shared/Button";
+import Button from "../../shared/Button";
 import { useState } from "react";
-import { getForm } from "./service";
+import { getForm } from "../service";
 import { useNavigate } from "react-router-dom";
-import Spiner from "../shared/Spinner";
+import Spiner from "../../shared/spinner/Spinner";
+
+import DrawTags from "../DrawTags";
 
 const AdNew = ({ ...props }) => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const AdNew = ({ ...props }) => {
   const [formData, setFormData] = useState({
     name: "",
     sale: Boolean,
-    price: 0,
+    price: "",
     tags: [],
   });
 
@@ -104,7 +106,7 @@ const AdNew = ({ ...props }) => {
               className="form-input"
               type="radio"
               name="sale"
-              value={false}
+              value={true}
               onChange={handleChange}
               required
             />
@@ -113,7 +115,7 @@ const AdNew = ({ ...props }) => {
               className="form-input"
               type="radio"
               name="sale"
-              value={true}
+              value={false}
               onChange={handleChange}
               required
             />
@@ -140,7 +142,16 @@ const AdNew = ({ ...props }) => {
             placeholder="Ejm:mobile,motor"
           /> */}
 
-          <select
+          <DrawTags
+            id="tags"
+            name="tags"
+            // type=""
+            required
+            multiple
+            onChange={handleSelectChange}
+          />
+
+          {/* <select
             id="tags"
             name="tags"
             type="text"
@@ -152,7 +163,7 @@ const AdNew = ({ ...props }) => {
             <option value="mobile">Mobile</option>
             <option value="motor">Motor</option>
             <option value="work">Work</option>
-          </select>
+          </select> */}
 
           {/* <label className="form-label">img OPCIONAL:</label> */}
           <input

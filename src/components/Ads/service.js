@@ -31,16 +31,3 @@ export const deleteAd = id => {
   const url = `${adsUrl}/${id}`;
   return client.delete(url);
 };
-
-// var bodyFormData = new FormData();
-
-// const element = document.getElementById("image");
-// const file = element.files[0];
-
-// bodyFormData.append("userName", form.name);
-// bodyFormData.append("files[]", file); // files[] ES LO IMPORTANTE, ES LO QUE ESPERA EL FORM DATA
-
-// return client.post("/create/user", bodyFormData, config).then(_ => {
-//   console.log("usuario creado");
-// });
-// };

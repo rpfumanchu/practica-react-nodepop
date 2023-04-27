@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAd, deleteAd } from "./service";
-import Layout from "../layout/Layout";
-import "./AdsPage.css";
+import { getAd, deleteAd } from "../service";
+import Layout from "../../layout/Layout";
+import "../adsPage/AdsPage.css";
 import "./AdDetail.css";
-import DefaultPhoto from "../shared/DefaultPhoto";
-import Button from "../shared/Button";
-import Modal from "../shared/modal/Modal";
+import DefaultPhoto from "../../shared/defaultPhoto/DefaultPhoto";
+import Button from "../../shared/Button";
+import Modal from "../../shared/modal/Modal";
 
 const AdDetail = props => {
   const params = useParams();
@@ -79,9 +79,6 @@ const AdDetail = props => {
               </Button>
             ) : (
               <Modal
-                //style={{ display: showModal ? "flex" : "none" }}
-                // show={showModal}
-                // onHide={handleShowModalCancel}
                 message="¿Estas seguro? "
                 onConfirm={handleShowModalconfirm}
                 onCancel={handleShowModalCancel}
