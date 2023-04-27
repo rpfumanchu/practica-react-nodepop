@@ -66,7 +66,7 @@ const AdDetail = props => {
             {/* <span>{(ad.photo = adStatusImage())}</span> */}
             {/* <p class="text">${ad.stateuse}</p>
             <p class="text">${ad.description}</p> */}
-            <span className="span">{ad.tags}</span>
+            <span className="span">{ad.tags.join(", ")}</span>
 
             {showModal ? (
               <Button
@@ -79,6 +79,7 @@ const AdDetail = props => {
               </Button>
             ) : (
               <Modal
+                title="Confirmar acciòn"
                 message="¿Estas seguro? "
                 onConfirm={handleShowModalconfirm}
                 onCancel={handleShowModalCancel}

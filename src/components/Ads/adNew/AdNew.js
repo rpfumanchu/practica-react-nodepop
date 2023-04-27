@@ -1,25 +1,24 @@
 import Layout from "../../layout/Layout";
 import "./AdNew.css";
 import Button from "../../shared/Button";
-import { useState } from "react";
-import { getForm } from "../service";
+import { useEffect, useState } from "react";
+import { getForm, getTags } from "../service";
 import { useNavigate } from "react-router-dom";
 import Spiner from "../../shared/spinner/Spinner";
 
-import DrawTags from "../DrawTags";
+//import DrawTags from "../DrawTags";
 
-const AdNew = ({ ...props }) => {
+const AdNew = ({ handleSelect, ...props }) => {
   const navigate = useNavigate();
   //const [isLoading, setIsLoading] = useState(true);
   const [isCreateAd, setIsCreateAd] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [photo, setPhoto] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
-    sale: Boolean,
+    sale: true,
     price: "",
-    tags: [],
   });
-
-  const [photo, setPhoto] = useState(null);
 
   const handleSelectChange = event => {
     const options = event.target.options;
@@ -79,6 +78,15 @@ const AdNew = ({ ...props }) => {
     navigate(`/api/v1/adverts/${ad.id}`);
     console.log(ad);
   };
+
+  useEffect(() => {
+    async function fetchTags() {
+      const tags = await getTags();
+      console.log("test", tags);
+      setTags(tags);
+    }
+    fetchTags();
+  }, []);
 
   return (
     <Layout title="sube un anuncio" {...props}>
@@ -142,14 +150,24 @@ const AdNew = ({ ...props }) => {
             placeholder="Ejm:mobile,motor"
           /> */}
 
-          <DrawTags
+          {/* <DrawTags onChange={handleSelectChange} {...props} /> */}
+
+          <select
             id="tags"
             name="tags"
-            // type=""
+            type="text"
             required
             multiple
-            onChange={handleSelectChange}
-          />
+            pattern="manten control para mas de un Tag"
+            onChange={handleSelectChange}>
+            <option value="">Seleccionar tags...</option>
+            {tags.map((tag, index) => (
+              <option key={index} value={tag}>
+                {tag}
+              </option>
+            ))}
+          </select>
+          <small>manten pulsado control para seleccionar màs de un Tag</small>
 
           {/* <select
             id="tags"

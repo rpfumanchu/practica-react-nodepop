@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getTags } from "./service";
 
-const DrawTags = props => {
-  const { handleSelect } = props;
+const DrawTags = () => {
+  //const { handleSelect } = props;
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const DrawTags = props => {
   }, []);
 
   return (
-    <select onChange={handleSelect}>
+    <select>
       <option value="">Seleccionar tags...</option>
       {tags.map((tag, index) => (
         <option key={index} value={tag}>

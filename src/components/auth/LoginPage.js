@@ -4,6 +4,7 @@ import { login } from "./service";
 import "./LoginPage.css";
 import Layout from "../layout/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
+import ErrorModal from "../shared/modal/ErrorModal";
 //import Spinner from "../shared/spinner/Spinner";
 
 //DONE Loguear con email y password y un checkbox para dar la opcion de persistir el token
@@ -11,6 +12,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 function LoginPage({ onLogin, ...rest }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  // const [showModal, setShowModal] = useState(true);
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -18,18 +22,38 @@ function LoginPage({ onLogin, ...rest }) {
     rememberMe: false,
   });
 
+  const resetError = () => {
+    setError(null);
+  };
+
+  // const handleShowModalCancel = () => {
+  //   setShowModal(true);
+  // };
+
+  // const handleButton = () => {
+  //   setShowModal(false);
+  // };
+
   const handleSubmit = async event => {
     event.preventDefault();
 
-    await login(credentials);
+    resetError();
+    setIsLoading(true);
+    try {
+      await login(credentials);
+      setIsLoading(false);
 
-    //NOTE ahora estoy logueado
-    onLogin();
+      //NOTE ahora estoy logueado
+      onLogin();
 
-    //NOTE Redirigir al nombre de la ruta o a home
-    const to = location.state?.from?.pathname || "/";
+      //NOTE Redirigir al nombre de la ruta o a home
+      const to = location.state?.from?.pathname || "/";
 
-    navigate(to);
+      navigate(to);
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    }
   };
 
   const handleChange = event => {
@@ -39,7 +63,8 @@ function LoginPage({ onLogin, ...rest }) {
     });
   };
 
-  const buttonDisabled = !credentials.email || !credentials.password;
+  const buttonDisabled =
+    isLoading || !credentials.email || !credentials.password;
 
   return (
     <Layout title="Login Page" {...rest}>
@@ -80,6 +105,20 @@ function LoginPage({ onLogin, ...rest }) {
             Log in
           </Button>
         </form>
+        {/* {error && (
+          <div onClick={resetError} className="loginPage-error">
+            {error.message}
+          </div>
+        )} */}
+
+        {error && (
+          <ErrorModal
+            title="Error"
+            message={error.message}
+            // onConfirm={handleShowModalconfirm}
+            onCancel={resetError}
+          />
+        )}
       </div>
     </Layout>
   );
