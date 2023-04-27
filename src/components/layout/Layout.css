@@ -9,8 +9,10 @@
   border-left-width: 1px;
   border-right-width: 1px;
   margin: 0 auto;
-  max-width: 660px;
-  /* min-height: calc(100vh - 128px); */
+
+  max-width: 760px;
+
+  min-height: calc(99vh - 128px);
 }
 
 .layout-title {
@@ -26,6 +28,8 @@
   display: flex;
   border-top-width: 1px;
   position: sticky;
+  /* position: absolute;
+  bottom: 0; */
 
   /* position: sticky; */
 }

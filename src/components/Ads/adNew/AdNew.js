@@ -21,14 +21,18 @@ const AdNew = ({ handleSelect, ...props }) => {
   });
 
   const handleSelectChange = event => {
-    const options = event.target.options;
-    const selectedTags = [];
+    const selectedTags = Array.from(
+      event.target.selectedOptions,
+      option => option.value,
+    );
+    // const options = event.target.options;
+    // const selectedTags = [];
 
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedTags.push(options[i].value);
-      }
-    }
+    // for (let i = 0; i < options.length; i++) {
+    //   if (options[i].selected) {
+    //     selectedTags.push(options[i].value);
+    //   }
+    // }
 
     setFormData({ ...formData, tags: selectedTags });
   };
