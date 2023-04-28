@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Spiner from "../../shared/spinner/Spinner";
 import DrawTags from "../DrawTags";
 
-const AdNew = ({ handleSelect, ...props }) => {
+const AdNew = () => {
   const navigate = useNavigate();
   //const [isLoading, setIsLoading] = useState(true);
   const [isCreateAd, setIsCreateAd] = useState(false);
@@ -74,7 +74,7 @@ const AdNew = ({ handleSelect, ...props }) => {
   };
 
   return (
-    <Layout title="sube un anuncio" {...props}>
+    <Layout title="sube un anuncio">
       {isCreateAd ? (
         <Spiner message="creando..." />
       ) : (
@@ -126,7 +126,7 @@ const AdNew = ({ handleSelect, ...props }) => {
 
           {/* <label className="form-label">Tag</label> */}
 
-          <DrawTags handleSelectChange={handleSelectChange} {...props} />
+          <DrawTags handleSelectChange={handleSelectChange} />
 
           {/* <label className="form-label">img OPCIONAL:</label> */}
           <input

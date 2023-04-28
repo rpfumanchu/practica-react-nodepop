@@ -8,7 +8,7 @@ import DefaultPhoto from "../../shared/defaultPhoto/DefaultPhoto";
 import Button from "../../shared/Button";
 import Modal from "../../shared/modal/Modal";
 
-const AdDetail = props => {
+const AdDetail = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -43,7 +43,7 @@ const AdDetail = props => {
   };
 
   return (
-    <Layout title="Detalle del anuncio" {...props}>
+    <Layout title="Detalle del anuncio">
       {(ad || error) && (
         <div className="ad-detail">
           <div className="ad">

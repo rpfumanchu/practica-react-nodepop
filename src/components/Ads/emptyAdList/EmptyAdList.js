@@ -1,6 +1,7 @@
 import Button from "../../shared/Button";
 import { Link } from "react-router-dom";
 import "./EmptyAdList.css";
+
 const EmptyAdList = () => {
   return (
     <div className="empty-ad-list">

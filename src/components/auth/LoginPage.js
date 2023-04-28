@@ -5,11 +5,13 @@ import "./LoginPage.css";
 import Layout from "../layout/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
 import ErrorModal from "../shared/modal/ErrorModal";
+import { useAuth } from "./context";
 //import Spinner from "../shared/spinner/Spinner";
 
 //DONE Loguear con email y password y un checkbox para dar la opcion de persistir el token
 
-function LoginPage({ onLogin, ...rest }) {
+function LoginPage() {
+  const { onLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +69,7 @@ function LoginPage({ onLogin, ...rest }) {
     isLoading || !credentials.email || !credentials.password;
 
   return (
-    <Layout title="Login Page" {...rest}>
+    <Layout title="Login Page">
       <div>
         <form onSubmit={handleSubmit} className="container-form">
           <label className="form-label">Email</label>

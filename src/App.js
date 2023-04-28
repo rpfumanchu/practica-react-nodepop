@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import LoginPage from "./components/auth/LoginPage";
 import AdsPage from "./components/Ads/adsPage/AdsPage";
@@ -10,54 +9,32 @@ import RequireAuth from "./components/auth/RequireAuth";
 import HomePage from "./components/Ads/HomePage";
 
 function App({ isInitiallyLogged }) {
-  const [isLogged, setIsLogged] = useState(isInitiallyLogged);
-
-  const handleLogin = () => {
-    setIsLogged(true);
-  };
-
-  const handleLogout = () => {
-    setIsLogged(false);
-  };
-
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/api/v1/adverts/home"
-          element={<HomePage onLogout={handleLogout} isLogged={isLogged} />}
-        />
+        <Route path="/api/v1/adverts/home" element={<HomePage />} />
         <Route
           path="/api/v1/adverts"
           element={
-            <RequireAuth isLogged={isLogged}>
-              <AdsPage onLogout={handleLogout} isLogged={isLogged} />
+            <RequireAuth>
+              <AdsPage />
             </RequireAuth>
           }
         />
-        <Route
-          path="/api/auth/login"
-          element={
-            <LoginPage
-              onLogout={handleLogout}
-              isLogged={isLogged}
-              onLogin={handleLogin}
-            />
-          }
-        />
+        <Route path="/api/auth/login" element={<LoginPage />} />
         <Route
           path="/api/v1/adverts/new"
           element={
-            <RequireAuth isLogged={isLogged}>
-              <AdNew onLogout={handleLogout} isLogged={isLogged} />
+            <RequireAuth>
+              <AdNew />
             </RequireAuth>
           }
         />
         <Route
           path="/api/v1/adverts/:id"
           element={
-            <RequireAuth isLogged={isLogged}>
-              <AdDetail onLogout={handleLogout} isLogged={isLogged} />
+            <RequireAuth>
+              <AdDetail />
             </RequireAuth>
           }
         />

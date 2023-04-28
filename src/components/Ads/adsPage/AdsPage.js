@@ -9,7 +9,7 @@ import EmptyAdList from "../emptyAdList/EmptyAdList";
 import ErrorModal from "../../shared/modal/ErrorModal";
 import DrawTags from "../DrawTags";
 
-const AdsPage = props => {
+const AdsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [ads, setAds] = useState([]);
   const [query, setQuery] = useState("");
@@ -17,6 +17,11 @@ const AdsPage = props => {
   const [queryPriceRange, setQueryPriceRange] = useState("");
   const [noResults, setNoResult] = useState(true);
   const [queryTags, setQueryTags] = useState([]);
+  const [error, setError] = useState(null);
+
+  const resetError = () => {
+    setError(null);
+  };
 
   const handleSelectChange = event => {
     const selectedTags = Array.from(
@@ -28,7 +33,7 @@ const AdsPage = props => {
     setNoResult(true);
   };
 
-  const resetError = () => {
+  const resetModal = () => {
     setNoResult(false);
   };
 
@@ -48,13 +53,18 @@ const AdsPage = props => {
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
-      setNoResult(true);
+      try {
+        setIsLoading(true);
+        setNoResult(true);
 
-      const ads = await getAds();
+        const ads = await getAds();
 
-      setAds(ads);
-      setIsLoading(false);
+        setAds(ads);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
       //setNoResult(true);
     }
     fetchData();
@@ -91,7 +101,7 @@ const AdsPage = props => {
     });
 
   return (
-    <Layout title="Que quieres hacer..." {...props}>
+    <Layout title="Que quieres hacer...">
       {isLoading ? (
         <Spiner message="cargando..." />
       ) : (
@@ -146,14 +156,14 @@ const AdsPage = props => {
                 <option value="opcion3">100 - 250 </option>
                 <option value="opcion4"> &gt;250 </option>
               </select>
-              <DrawTags handleSelectChange={handleSelectChange} {...props} />
+              <DrawTags handleSelectChange={handleSelectChange} />
 
               <div className="ad-container ">
                 {filteredAds.length === 0 && noResults ? (
                   <ErrorModal
                     title="Upsssss"
                     message={"No hay resultados"}
-                    onCancel={resetError}
+                    onCancel={resetModal}
                   />
                 ) : (
                   <ul>
@@ -172,6 +182,14 @@ const AdsPage = props => {
             <EmptyAdList />
           )}
         </div>
+      )}
+      {error && (
+        <ErrorModal
+          title="Error"
+          message={error.message}
+          // onConfirm={handleShowModalconfirm}
+          onCancel={resetError}
+        />
       )}
     </Layout>
   );
