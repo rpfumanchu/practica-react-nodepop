@@ -34,6 +34,7 @@ const AdsPage = props => {
 
   const handleChange = event => {
     setQuery(event.target.value);
+    setNoResult(true);
   };
 
   const handleChangeSale = event => {
@@ -85,9 +86,8 @@ const AdsPage = props => {
       }
     })
     .filter(ad => {
-      if (queryTags.length === 0) return true;
-      console.log("resrtags", queryTags);
-      return queryTags.some(tag => ad.tags.includes(tag));
+      if (queryTags.length === []) return [];
+      return queryTags.every(tag => ad.tags.includes(tag));
     });
 
   return (
@@ -122,6 +122,7 @@ const AdsPage = props => {
                 type="radio"
                 name="sale"
                 value={true}
+                checked={querySale === "true"}
                 onClick={handleChangeSale}
               />
               <label>Compra</label>
