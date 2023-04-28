@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getForm, getTags } from "../service";
 import { useNavigate } from "react-router-dom";
 import Spiner from "../../shared/spinner/Spinner";
+import DrawTags from "../DrawTags";
 
 //import DrawTags from "../DrawTags";
 
@@ -12,7 +13,7 @@ const AdNew = ({ handleSelect, ...props }) => {
   const navigate = useNavigate();
   //const [isLoading, setIsLoading] = useState(true);
   const [isCreateAd, setIsCreateAd] = useState(false);
-  const [tags, setTags] = useState([]);
+  //const [tags, setTags] = useState([]);
   const [photo, setPhoto] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -83,14 +84,14 @@ const AdNew = ({ handleSelect, ...props }) => {
     console.log(ad);
   };
 
-  useEffect(() => {
-    async function fetchTags() {
-      const tags = await getTags();
-      console.log("test", tags);
-      setTags(tags);
-    }
-    fetchTags();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchTags() {
+  //     const tags = await getTags();
+  //     console.log("test", tags);
+  //     setTags(tags);
+  //   }
+  //   fetchTags();
+  // }, []);
 
   return (
     <Layout title="sube un anuncio" {...props}>
@@ -154,9 +155,9 @@ const AdNew = ({ handleSelect, ...props }) => {
             placeholder="Ejm:mobile,motor"
           /> */}
 
-          {/* <DrawTags onChange={handleSelectChange} {...props} /> */}
+          <DrawTags handleSelectChange={handleSelectChange} {...props} />
 
-          <select
+          {/* <select
             id="tags"
             name="tags"
             type="text"
@@ -170,8 +171,8 @@ const AdNew = ({ handleSelect, ...props }) => {
                 {tag}
               </option>
             ))}
-          </select>
-          <small>manten pulsado control para seleccionar màs de un Tag</small>
+          </select> */}
+          {/* <small>manten pulsado control para seleccionar màs de un Tag</small> */}
 
           {/* <select
             id="tags"
