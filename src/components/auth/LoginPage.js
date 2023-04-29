@@ -6,9 +6,9 @@ import Layout from "../layout/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
 import ErrorModal from "../shared/modal/ErrorModal";
 import { useAuth } from "./context";
-//import Spinner from "../shared/spinner/Spinner";
+import Spinner from "../shared/spinner/Spinner";
 
-//DONE Loguear con email y password y un checkbox para dar la opcion de persistir el token
+//DONE Loguear con email y password y un checkbox para dar la opción de persistir el token, además manejar errores y feedback al usuario. Al hacer Login quiero enviar al usuario a la página a la que queria ir.
 
 function LoginPage() {
   const { onLogin } = useAuth();
@@ -16,7 +16,7 @@ function LoginPage() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -28,13 +28,21 @@ function LoginPage() {
     setError(null);
   };
 
-  // const handleShowModalCancel = () => {
-  //   setShowModal(true);
-  // };
+  const handleChange = event => {
+    setCredentials({
+      ...credentials,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  // const handleButton = () => {
-  //   setShowModal(false);
-  // };
+  const handleShowModal = () => {
+    setShowModal(false);
+
+    //NOTE Redirigir al nombre de la ruta o a home
+    const to = location.state?.from?.pathname || "/";
+
+    navigate(to);
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -45,24 +53,14 @@ function LoginPage() {
       await login(credentials);
       setIsLoading(false);
 
+      setShowModal(true);
+
       //NOTE ahora estoy logueado
       onLogin();
-
-      //NOTE Redirigir al nombre de la ruta o a home
-      const to = location.state?.from?.pathname || "/";
-
-      navigate(to);
     } catch (error) {
       setError(error);
       setIsLoading(false);
     }
-  };
-
-  const handleChange = event => {
-    setCredentials({
-      ...credentials,
-      [event.target.name]: event.target.value,
-    });
   };
 
   const buttonDisabled =
@@ -71,53 +69,59 @@ function LoginPage() {
   return (
     <Layout title="Login Page">
       <div>
-        <form onSubmit={handleSubmit} className="container-form">
-          <label className="form-label">Email</label>
-          <input
-            className="form-input"
-            type="text"
-            name="email"
-            onChange={handleChange}
-            value={credentials.email}
-            required
-          />
-          <label className="form-label">Password</label>
-          <input
-            className="form-input"
-            type="password"
-            name="password"
-            onChange={handleChange}
-            value={credentials.password}
-            required
-          />
-          <label>
-            Guardar sesiòn
+        {isLoading ? (
+          <Spinner message="cargando..." />
+        ) : (
+          <form onSubmit={handleSubmit} className="container-form">
+            <label className="form-label">Email</label>
             <input
-              type="checkbox"
-              name="rememberMe"
-              value={credentials.rememberMe}
+              className="form-input"
+              type="text"
+              name="email"
               onChange={handleChange}
+              value={credentials.email}
+              required
             />
-          </label>
-          <Button
-            type="submit"
-            variant="primary"
-            width="button-form"
-            disabled={buttonDisabled}>
-            Log in
-          </Button>
-        </form>
-        {/* {error && (
-          <div onClick={resetError} className="loginPage-error">
-            {error.message}
-          </div>
-        )} */}
+            <label className="form-label">Password</label>
+            <input
+              className="form-input"
+              type="password"
+              name="password"
+              onChange={handleChange}
+              value={credentials.password}
+              required
+            />
+            <label>
+              Guardar sesiòn
+              <input
+                type="checkbox"
+                name="rememberMe"
+                value={credentials.rememberMe}
+                onChange={handleChange}
+              />
+            </label>
+            <Button
+              type="submit"
+              variant="primary"
+              width="button-form"
+              disabled={buttonDisabled}>
+              Log in
+            </Button>
+          </form>
+        )}
+
+        {showModal && (
+          <ErrorModal
+            title="Login"
+            message={"Acabas de iniciar sesión"}
+            onCancel={handleShowModal}
+          />
+        )}
 
         {error && (
           <ErrorModal
             title="Error"
             message={error.message}
-            // onConfirm={handleShowModalconfirm}
             onCancel={resetError}
           />
         )}

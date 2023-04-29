@@ -7,6 +7,7 @@ import "./AdDetail.css";
 import DefaultPhoto from "../../shared/defaultPhoto/DefaultPhoto";
 import Button from "../../shared/Button";
 import Modal from "../../shared/modal/Modal";
+import ErrorModal from "../../shared/modal/ErrorModal";
 
 const AdDetail = () => {
   const params = useParams();
@@ -15,6 +16,31 @@ const AdDetail = () => {
   const [ad, setAd] = useState(null);
   const [deleteAdId, setDeleteAdId] = useState(null);
   const [showModal, setShowModal] = useState(true);
+  const [showDeleteMessage, setShowDeleteMessage] = useState(false);
+
+  const resetError = () => {
+    setError(null);
+  };
+
+  const handleDeleteMessage = () => {
+    setShowDeleteMessage(false);
+    navigate("/api/v1/adverts");
+  };
+
+  const handleShowModalconfirm = async event => {
+    const removeAd = await deleteAd(params.id);
+    setDeleteAdId(removeAd);
+    setShowDeleteMessage(true);
+    console.log(deleteAdId);
+  };
+
+  const handleShowModalCancel = () => {
+    setShowModal(true);
+  };
+
+  const handleButton = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     getAd(params.id)
@@ -26,21 +52,6 @@ const AdDetail = () => {
         setError(error);
       });
   }, [params.id, navigate]);
-
-  const handleShowModalconfirm = async event => {
-    const removeAd = await deleteAd(params.id);
-    setDeleteAdId(removeAd);
-    navigate("/api/v1/adverts");
-    console.log(deleteAdId);
-  };
-
-  const handleShowModalCancel = () => {
-    setShowModal(true);
-  };
-
-  const handleButton = () => {
-    setShowModal(false);
-  };
 
   return (
     <Layout title="Detalle del anuncio">
@@ -62,10 +73,7 @@ const AdDetail = () => {
                   alt="imagenes anuncios"></img>
               )}
             </span>
-            {/* <DefaultPhoto className="img" /> */}
-            {/* <span>{(ad.photo = adStatusImage())}</span> */}
-            {/* <p class="text">${ad.stateuse}</p>
-            <p class="text">${ad.description}</p> */}
+
             <span className="span">{ad.tags.join(", ")}</span>
 
             {showModal ? (
@@ -86,24 +94,24 @@ const AdDetail = () => {
               />
             )}
           </div>
+          {showDeleteMessage && (
+            <ErrorModal
+              title="Borrar Anuncio"
+              message={"Fue eliminado correctamenete"}
+              onCancel={handleDeleteMessage}
+            />
+          )}
         </div>
+      )}
+      {error && (
+        <ErrorModal
+          title="Error"
+          message={error.message}
+          onCancel={resetError}
+        />
       )}
     </Layout>
   );
-  // return <Layout title="detalle del anincio" {...props}></Layout>;
-  // return (
-  //   <Layout title="Tweet detail" {...props}>
-  //     {/* <div>{ad.name}</div> */}
-  //     <div>esta es la pagina de detalle</div>
-  //   </Layout>
-  // <Layout title="Detalle del Anuncio" {...rest}>
-  //   {ad && (
-  //     <div className="ad-container">
-  //       {ad.name} {ad.price} {ad.tags} {ad.state}
-  //     </div>
-  //   )}
-  // </Layout>
-  // );
 };
 
 export default AdDetail;

@@ -4,10 +4,11 @@ import "./AdsPage.css";
 import { Link } from "react-router-dom";
 import DrawAd from "../DrawAd";
 import { useEffect, useState } from "react";
-import Spiner from "../../shared/spinner/Spinner";
+import Spinner from "../../shared/spinner/Spinner";
 import EmptyAdList from "../emptyAdList/EmptyAdList";
 import ErrorModal from "../../shared/modal/ErrorModal";
 import DrawTags from "../DrawTags";
+//import { useRef } from "react";
 
 const AdsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +19,12 @@ const AdsPage = () => {
   const [noResults, setNoResult] = useState(true);
   const [queryTags, setQueryTags] = useState([]);
   const [error, setError] = useState(null);
+
+  // const inputRef = useRef(null);
+  // console.log("ref", inputRef);
+  // useEffect(() => {
+  //   inputRef.current.focus();
+  // }, []);
 
   const resetError = () => {
     setError(null);
@@ -39,6 +46,7 @@ const AdsPage = () => {
 
   const handleChange = event => {
     setQuery(event.target.value);
+    setNoResult(true);
   };
 
   const handleChangeSale = event => {
@@ -55,7 +63,7 @@ const AdsPage = () => {
     async function fetchData() {
       try {
         setIsLoading(true);
-        setNoResult(true);
+        //setNoResult(true);
 
         const ads = await getAds();
 
@@ -64,8 +72,8 @@ const AdsPage = () => {
         setError(error);
       } finally {
         setIsLoading(false);
+        //setNoResult(true);
       }
-      //setNoResult(true);
     }
     fetchData();
   }, []);
@@ -103,7 +111,7 @@ const AdsPage = () => {
   return (
     <Layout title="Que quieres hacer...">
       {isLoading ? (
-        <Spiner message="cargando..." />
+        <Spinner message="cargando..." />
       ) : (
         <div>
           {!!ads.length ? (
@@ -111,6 +119,7 @@ const AdsPage = () => {
               <label>
                 Search:{" "}
                 <input
+                  // ref={inputRef}
                   type="text"
                   style={{ borderWidth: 1 }}
                   value={query}

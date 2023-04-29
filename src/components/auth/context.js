@@ -29,3 +29,24 @@ export const AuthContextProvider = ({ isInitiallyLogged, children }) => {
     <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
   );
 };
+
+// export const IsLoadingContextProvider = ({ isNowLoading, children }) => {
+//   const [isLoading, setIsLoading] = useState(isNowLoading);
+//   const handleIsLoading = () => {
+//     setIsLoading(true);
+//   };
+
+//   const handleIsNotLoading = () => {
+//     setIsLoading(false);
+//   };
+
+//   const loadingValue = {
+//     isLoading,
+//     onLoading: handleIsLoading,
+//     notLoading: handleIsNotLoading,
+//   };
+
+//   return (
+//     <AuthContext.Provider value={loadingValue}>{children}</AuthContext.Provider>
+//   );
+// };

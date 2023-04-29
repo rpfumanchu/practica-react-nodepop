@@ -8,7 +8,7 @@ import AdDetail from "./components/Ads/adDetail/AdDetail";
 import RequireAuth from "./components/auth/RequireAuth";
 import HomePage from "./components/Ads/HomePage";
 
-function App({ isInitiallyLogged }) {
+function App() {
   return (
     <div className="App">
       <Routes>

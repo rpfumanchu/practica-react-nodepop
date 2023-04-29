@@ -4,13 +4,19 @@ import Button from "../../shared/Button";
 import { useState } from "react";
 import { getForm } from "../service";
 import { useNavigate } from "react-router-dom";
-import Spiner from "../../shared/spinner/Spinner";
+import Spinner from "../../shared/spinner/Spinner";
 import DrawTags from "../DrawTags";
+import ErrorModal from "../../shared/modal/ErrorModal";
 
 const AdNew = () => {
   const navigate = useNavigate();
   //const [isLoading, setIsLoading] = useState(true);
   const [isCreateAd, setIsCreateAd] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(false);
+  };
 
   const [photo, setPhoto] = useState(null);
   const [formData, setFormData] = useState({
@@ -43,40 +49,33 @@ const AdNew = () => {
     event.preventDefault();
     //setIsLoading(false);
     setIsCreateAd(true);
+
+    //NOTE  Object.keys() para obtener las claves de formData
     const adNew = new FormData();
-    if (photo === null) {
-      adNew.append("name", formData.name);
-      adNew.append("sale", formData.sale);
-      adNew.append("price", formData.price);
-      adNew.append("tags", formData.tags);
-    } else {
-      adNew.append("name", formData.name);
-      adNew.append("sale", formData.sale);
-      adNew.append("price", formData.price);
-      adNew.append("tags", formData.tags);
+
+    Object.keys(formData).forEach(key => {
+      adNew.append(key, formData[key]);
+    });
+
+    if (photo !== null) {
       adNew.append("photo", photo.photo);
     }
 
-    // adNew.append("name", formData.name);
-    // adNew.append("sale", formData.sale);
-    // adNew.append("price", formData.price);
-    // adNew.append("tags", formData.tags);
-    // adNew.append("photo", photo.photo);
+    setShowModal(true);
 
-    // for (let key in formData) {
-    //   adNew.append(key, formData[key]);
-    // }
-
+    //TODO poner un try
     const ad = await getForm(adNew);
     // setIsLoading(true);
     setIsCreateAd(false);
+
     navigate(`/api/v1/adverts/${ad.id}`);
   };
 
+  //TODO terminar de poner label
   return (
     <Layout title="sube un anuncio">
       {isCreateAd ? (
-        <Spiner message="creando..." />
+        <Spinner message="Cargando..." />
       ) : (
         <form
           onSubmit={handleSubmit}
@@ -147,6 +146,14 @@ const AdNew = () => {
             Crear
           </Button>
         </form>
+      )}
+
+      {showModal && (
+        <ErrorModal
+          title="Anuncio"
+          message={"Acabas de crear un nuevo anuncio"}
+          onCancel={handleShowModal}
+        />
       )}
     </Layout>
   );

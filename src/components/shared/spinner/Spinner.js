@@ -1,6 +1,6 @@
 import "./Spinner.css";
 
-const Spiner = ({ message, ...props }) => {
+const Spinner = ({ message, ...props }) => {
   return (
     <div className="spinner" {...props}>
       <div className="cargando">
@@ -13,4 +13,4 @@ const Spiner = ({ message, ...props }) => {
   );
 };
 
-export default Spiner;
+export default Spinner;

@@ -11,7 +11,7 @@ function ErrorModal(props) {
         <div className="modal-body">{message}</div>
         <div className="modal-errorButton">
           <Button onClick={onCancel} variant="primary2">
-            Volver
+            Click
           </Button>
         </div>
       </div>
