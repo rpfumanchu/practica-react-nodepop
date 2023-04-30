@@ -94,7 +94,7 @@ const AdsPage = () => {
   const filterAdTags = ad => {
     const queryTagsFiltered = [...queryTags.filter(x => x !== "")]; // [""] => []
     if (queryTagsFiltered.length === 0) return true;
-    console.log("resrtags", queryTagsFiltered);
+
     return queryTagsFiltered.every(tag => ad.tags.includes(tag));
   };
 

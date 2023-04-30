@@ -12,7 +12,6 @@ let ad = {};
 
 const AdNew = () => {
   const navigate = useNavigate();
-  //const [isLoading, setIsLoading] = useState(true);
   const [isCreateAd, setIsCreateAd] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
@@ -47,7 +46,6 @@ const AdNew = () => {
       ...formData,
       [event.target.name]: event.target.value,
     });
-    console.log("text", { formData });
   };
   const handleChangeInputFile = e => {
     setPhoto({ ...photo, photo: e.target.files[0] });
@@ -57,7 +55,6 @@ const AdNew = () => {
     event.preventDefault();
     resetError();
     try {
-      //setIsLoading(false);
       setIsCreateAd(true);
 
       //NOTE  Object.keys() para obtener las claves de formData
@@ -72,11 +69,9 @@ const AdNew = () => {
       }
 
       ad = await getForm(adNew);
-      // setIsLoading(true);
+
       setIsCreateAd(false);
       setShowModal(true);
-
-      // navigate(`/api/v1/adverts/${ad.id}`);
     } catch (error) {
       setError(error);
     }

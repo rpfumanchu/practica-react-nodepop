@@ -10,7 +10,7 @@ const DrawTags = props => {
   useEffect(() => {
     async function fetchTags() {
       const tags = await getTags();
-      console.log("test", tags);
+
       setTags(tags);
     }
     fetchTags();
