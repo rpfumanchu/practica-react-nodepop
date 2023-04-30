@@ -8,6 +8,8 @@ import Spinner from "../../shared/spinner/Spinner";
 import DrawTags from "../DrawTags";
 import ErrorModal from "../../shared/modal/ErrorModal";
 
+let ad = {};
+
 const AdNew = () => {
   const navigate = useNavigate();
   //const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +18,7 @@ const AdNew = () => {
 
   const handleShowModal = () => {
     setShowModal(false);
+    navigate(`/api/v1/adverts/${ad.id}`);
   };
 
   const [photo, setPhoto] = useState(null);
@@ -41,7 +44,7 @@ const AdNew = () => {
     });
     console.log("text", { formData });
   };
-  const handleChangeInputFlile = e => {
+  const handleChangeInputFile = e => {
     setPhoto({ ...photo, photo: e.target.files[0] });
   };
 
@@ -61,14 +64,13 @@ const AdNew = () => {
       adNew.append("photo", photo.photo);
     }
 
-    setShowModal(true);
-
     //TODO poner un try
-    const ad = await getForm(adNew);
+    ad = await getForm(adNew);
     // setIsLoading(true);
     setIsCreateAd(false);
+    setShowModal(true);
 
-    navigate(`/api/v1/adverts/${ad.id}`);
+    // navigate(`/api/v1/adverts/${ad.id}`);
   };
 
   //TODO terminar de poner label
@@ -134,7 +136,7 @@ const AdNew = () => {
             name="img"
             id="img"
             accept="image/*"
-            onChange={handleChangeInputFlile}
+            onChange={handleChangeInputFile}
           />
 
           <Button

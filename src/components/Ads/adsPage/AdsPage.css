@@ -35,3 +35,12 @@
 .ad-tags {
   padding: 0 10px;
 }
+
+.filters {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+}

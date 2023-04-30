@@ -78,35 +78,40 @@ const AdsPage = () => {
     fetchData();
   }, []);
 
-  const filteredAds = ads
+  const filterAdSaleValueOrDefault = ad =>
+    !querySale || ad.sale.toString() === querySale;
 
-    .filter(ad => {
-      if (querySale === "") {
+  const filterAdName = ad =>
+    (ad.name ?? "").toUpperCase().startsWith(query.toUpperCase());
+
+  const filterAdPrice = ad => {
+    if (!queryPriceRange) return true;
+    switch (queryPriceRange) {
+      case "opcion1":
+        return ad.price < 50;
+      case "opcion2":
+        return ad.price >= 50 && ad.price <= 100;
+      case "opcion3":
+        return ad.price >= 100 && ad.price <= 250;
+      case "opcion4":
+        return ad.price >= 250;
+      default:
         return true;
-      }
-      return ad.sale ? querySale === "true" : querySale === "false";
-    })
-    .filter(ad => (ad.name ?? "").toUpperCase().startsWith(query.toUpperCase()))
-    .filter(ad => {
-      if (!queryPriceRange) return true;
-      switch (queryPriceRange) {
-        case "opcion1":
-          return ad.price < 50;
-        case "opcion2":
-          return ad.price >= 50 && ad.price <= 100;
-        case "opcion3":
-          return ad.price >= 100 && ad.price <= 250;
-        case "opcion4":
-          return ad.price >= 250;
-        default:
-          return true;
-      }
-    })
-    .filter(ad => {
-      if (queryTags.length === 0) return true;
-      console.log("resrtags", queryTags);
-      return queryTags.some(tag => ad.tags.includes(tag));
-    });
+    }
+  };
+
+  const filterAdTags = ad => {
+    const queryTagsFiltered = [...queryTags.filter(x => x !== "")]; // [""] => []
+    if (queryTagsFiltered.length === 0) return true;
+    console.log("resrtags", queryTagsFiltered);
+    return queryTagsFiltered.every(tag => ad.tags.includes(tag));
+  };
+
+  const filteredAds = ads
+    .filter(filterAdSaleValueOrDefault)
+    .filter(filterAdName)
+    .filter(filterAdPrice)
+    .filter(filterAdTags);
 
   return (
     <Layout title="Que quieres hacer...">
@@ -116,55 +121,58 @@ const AdsPage = () => {
         <div>
           {!!ads.length ? (
             <>
-              <label>
-                Search:{" "}
+              <section className="filters">
+                <label>
+                  Search:
+                  <input
+                    // ref={inputRef}
+                    type="text"
+                    style={{ borderWidth: 1 }}
+                    value={query}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>Todos</label>
                 <input
-                  // ref={inputRef}
-                  type="text"
-                  style={{ borderWidth: 1 }}
-                  value={query}
-                  onChange={handleChange}
+                  className="form-input"
+                  type="radio"
+                  name="sale"
+                  value={""}
+                  defaultChecked
+                  onClick={handleChangeSale}
                 />
-              </label>
-              <label>Todos</label>
-              <input
-                className="form-input"
-                type="radio"
-                name="sale"
-                value={""}
-                defaultChecked
-                onClick={handleChangeSale}
-              />
-              <label>Venta</label>
-              <input
-                className="form-input"
-                type="radio"
-                name="sale"
-                value={true}
-                onClick={handleChangeSale}
-              />
-              <label>Compra</label>
-              <input
-                className="form-input"
-                type="radio"
-                name="sale"
-                value={false}
-                onClick={handleChangeSale}
-              />
-              <label htmlFor="price-range">Precio:</label>
-              <select
-                id="price-range"
-                type="switch"
-                value={queryPriceRange}
-                onChange={handleChangePriceRange}>
-                <option value="" defaultChecked>
-                  Todos
-                </option>
-                <option value="opcion1">0 - 50 </option>
-                <option value="opcion2">50 - 100 </option>
-                <option value="opcion3">100 - 250 </option>
-                <option value="opcion4"> &gt;250 </option>
-              </select>
+                <label>Venta</label>
+                <input
+                  className="form-input"
+                  type="radio"
+                  name="sale"
+                  value={true}
+                  onClick={handleChangeSale}
+                />
+                <label>Compra</label>
+                <input
+                  className="form-input"
+                  type="radio"
+                  name="sale"
+                  value={false}
+                  onClick={handleChangeSale}
+                />
+                <label htmlFor="price-range">Precio:</label>
+                <select
+                  id="price-range"
+                  type="switch"
+                  value={queryPriceRange}
+                  onChange={handleChangePriceRange}>
+                  <option value="" defaultChecked>
+                    Todos
+                  </option>
+                  <option value="opcion1">0 - 50 </option>
+                  <option value="opcion2">50 - 100 </option>
+                  <option value="opcion3">100 - 250 </option>
+                  <option value="opcion4"> &gt;250 </option>
+                </select>
+              </section>
+
               <DrawTags handleSelectChange={handleSelectChange} />
 
               <div className="ad-container ">

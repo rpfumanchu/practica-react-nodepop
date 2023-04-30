@@ -5,13 +5,24 @@ import { ReactComponent as Icon } from "../../assets/nodepop.svg";
 import { logout } from "../auth/service";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../auth/context";
+import Modal from "../shared/modal/Modal";
+import { useState } from "react";
 
 const Header = ({ className }) => {
   const { isLogged, onLogout } = useAuth();
+  const [showModal, setShowModal] = useState(false);
 
-  const handleLogoutClick = async () => {
+  const handleLogoutClick = () => {
+    setShowModal(true);
+  };
+
+  const handleShowModalconfirm = async event => {
     await logout();
     onLogout();
+  };
+
+  const handleShowModalCancel = () => {
+    setShowModal(false);
   };
 
   return (
@@ -42,6 +53,16 @@ const Header = ({ className }) => {
         <Icon className="logo" />
         <h1 className="title-h1">Práctica NodePop</h1>
         <Icon className="logo" />
+      </div>
+      <div>
+        {showModal && (
+          <Modal
+            title="Abandonar sesión"
+            message="¿Estas seguro ? "
+            onConfirm={handleShowModalconfirm}
+            onCancel={handleShowModalCancel}
+          />
+        )}
       </div>
     </header>
   );

@@ -39,7 +39,7 @@ function App() {
           }
         />
 
-        <Route path="/" element={<Navigate to="/api/v1/adverts/home" />} />
+        <Route path="/" element={<Navigate to="/api/v1/adverts" />} />
         <Route path="/404" element={<Page404 />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>

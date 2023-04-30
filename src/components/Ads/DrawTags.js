@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { getTags } from "./service";
+import "./DrawTags.css";
 
 const DrawTags = props => {
   const { handleSelectChange } = props;
@@ -20,23 +21,24 @@ const DrawTags = props => {
 
   return (
     <>
-      <select
-        id="tags"
-        name="tags"
-        type=""
-        required
-        multiple
-        onChange={handleSelectChange}>
-        <option value={"allTags"} defaultChecked>
-          Seleccionar tags...
-        </option>
-        {tags.map((tag, index) => (
-          <option key={index} value={tag}>
-            {tag}
-          </option>
-        ))}
-      </select>
-      <small>manten pulsado control para seleccionar màs de un Tag</small>
+      <div className="filters-tags">
+        <select
+          id="tags"
+          name="tags"
+          required
+          multiple
+          onChange={handleSelectChange}>
+          <option value={""}>Seleccionar tags...</option>
+          {tags.map((tag, index) => (
+            <option key={index} value={tag}>
+              {tag}
+            </option>
+          ))}
+        </select>
+      </div>
+      <small className="small">
+        manten pulsado control para seleccionar màs de un Tag
+      </small>
     </>
   );
 };
