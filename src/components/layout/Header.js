@@ -28,13 +28,15 @@ const Header = ({ className }) => {
   return (
     <header>
       <nav className={classNames("header-navbar", className)}>
-        <Link to="/">
+        <Link to="/api/v1/adverts/home">
           <h4 className="navbar-h4">NodePop</h4>
         </Link>
         <ul className="navbar-list">
           <li className="navbar-list-item">
-            <NavLink to="/api/v1/adverts/new">New</NavLink>
-            <NavLink to="/api/v1/adverts" end>
+            <NavLink className="navbar-list-item" to="/api/v1/adverts/new">
+              New
+            </NavLink>
+            <NavLink className="navbar-list-item" to="/api/v1/adverts">
               Latest Ad
             </NavLink>
             {isLogged ? (

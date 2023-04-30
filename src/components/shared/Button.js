@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
 const accentColor = "rgb(29, 161, 242)";
-const closedColor = "red";
+const closedColor = "darkred";
 
 const Button = styled.button`
   cursor: pointer;
   background-color: ${props =>
     props.variant === "primary" ? accentColor : "white"};
   background-color: ${props =>
-    props.variant === "primary2" ? closedColor : "white"};
+    props.variant === "primary2" ? closedColor : "#13c1ac"};
   border-radius: 9999px;
   border-style: solid;
   border-width: 1px;
-  border-color: ${accentColor};
-  color: ${props => (props.variant === "primary" ? "#4b4b4b" : accentColor)};
+  border-color: ${closedColor};
+  color: ${props => (props.variant === "primary" ? "#4b4b4b" : "white")};
   display: inline-flex;
   align-items: center;
   font: inherit;

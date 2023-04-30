@@ -16,19 +16,11 @@ const DrawTags = props => {
     fetchTags();
   }, []);
 
-  const allTags = Array.from(tags);
-  console.log("araysss", allTags);
-
   return (
     <>
       <div className="filters-tags">
-        <select
-          id="tags"
-          name="tags"
-          required
-          multiple
-          onChange={handleSelectChange}>
-          <option value={""}>Seleccionar tags...</option>
+        <select name="tags" multiple onChange={handleSelectChange}>
+          <option value={""}>todos los Tags</option>
           {tags.map((tag, index) => (
             <option key={index} value={tag}>
               {tag}

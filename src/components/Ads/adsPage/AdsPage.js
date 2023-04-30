@@ -8,7 +8,6 @@ import Spinner from "../../shared/spinner/Spinner";
 import EmptyAdList from "../emptyAdList/EmptyAdList";
 import ErrorModal from "../../shared/modal/ErrorModal";
 import DrawTags from "../DrawTags";
-//import { useRef } from "react";
 
 const AdsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,12 +18,6 @@ const AdsPage = () => {
   const [noResults, setNoResult] = useState(true);
   const [queryTags, setQueryTags] = useState([]);
   const [error, setError] = useState(null);
-
-  // const inputRef = useRef(null);
-  // console.log("ref", inputRef);
-  // useEffect(() => {
-  //   inputRef.current.focus();
-  // }, []);
 
   const resetError = () => {
     setError(null);
@@ -63,7 +56,6 @@ const AdsPage = () => {
     async function fetchData() {
       try {
         setIsLoading(true);
-        //setNoResult(true);
 
         const ads = await getAds();
 
@@ -72,7 +64,6 @@ const AdsPage = () => {
         setError(error);
       } finally {
         setIsLoading(false);
-        //setNoResult(true);
       }
     }
     fetchData();
@@ -122,17 +113,16 @@ const AdsPage = () => {
           {!!ads.length ? (
             <>
               <section className="filters">
-                <label>
+                <label className="form-label">
                   Search:
                   <input
-                    // ref={inputRef}
                     type="text"
                     style={{ borderWidth: 1 }}
                     value={query}
                     onChange={handleChange}
                   />
                 </label>
-                <label>Todos</label>
+                <label className="form-label">Todos</label>
                 <input
                   className="form-input"
                   type="radio"
@@ -141,7 +131,7 @@ const AdsPage = () => {
                   defaultChecked
                   onClick={handleChangeSale}
                 />
-                <label>Venta</label>
+                <label className="form-label">Venta</label>
                 <input
                   className="form-input"
                   type="radio"
@@ -149,7 +139,7 @@ const AdsPage = () => {
                   value={true}
                   onClick={handleChangeSale}
                 />
-                <label>Compra</label>
+                <label className="form-label">Compra</label>
                 <input
                   className="form-input"
                   type="radio"
@@ -157,9 +147,8 @@ const AdsPage = () => {
                   value={false}
                   onClick={handleChangeSale}
                 />
-                <label htmlFor="price-range">Precio:</label>
+                <label className="form-label">Precio:</label>
                 <select
-                  id="price-range"
                   type="switch"
                   value={queryPriceRange}
                   onChange={handleChangePriceRange}>
@@ -204,7 +193,6 @@ const AdsPage = () => {
         <ErrorModal
           title="Error"
           message={error.message}
-          // onConfirm={handleShowModalconfirm}
           onCancel={resetError}
         />
       )}

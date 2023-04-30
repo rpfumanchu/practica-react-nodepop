@@ -12,9 +12,12 @@
 }
 
 .navbar-list-item > button {
-  text-decoration: none;
   padding: 2px 12px;
   margin: 0 20px;
+}
+
+.navbar-list-item {
+  padding: 2px 5px;
 }
 
 /* .list-item > Button:hover {
@@ -46,6 +49,8 @@ ul.list {
 
 .title-h1 {
   font-size: 30px;
+  margin-top: 15px;
+  padding: 10px 0px 10px 0px;
 }
 
 .logo {

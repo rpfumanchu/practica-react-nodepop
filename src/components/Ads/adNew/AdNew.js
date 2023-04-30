@@ -15,6 +15,11 @@ const AdNew = () => {
   //const [isLoading, setIsLoading] = useState(true);
   const [isCreateAd, setIsCreateAd] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState(null);
+
+  const resetError = () => {
+    setError(null);
+  };
 
   const handleShowModal = () => {
     setShowModal(false);
@@ -50,30 +55,33 @@ const AdNew = () => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    //setIsLoading(false);
-    setIsCreateAd(true);
+    resetError();
+    try {
+      //setIsLoading(false);
+      setIsCreateAd(true);
 
-    //NOTE  Object.keys() para obtener las claves de formData
-    const adNew = new FormData();
+      //NOTE  Object.keys() para obtener las claves de formData
+      const adNew = new FormData();
 
-    Object.keys(formData).forEach(key => {
-      adNew.append(key, formData[key]);
-    });
+      Object.keys(formData).forEach(key => {
+        adNew.append(key, formData[key]);
+      });
 
-    if (photo !== null) {
-      adNew.append("photo", photo.photo);
+      if (photo !== null) {
+        adNew.append("photo", photo.photo);
+      }
+
+      ad = await getForm(adNew);
+      // setIsLoading(true);
+      setIsCreateAd(false);
+      setShowModal(true);
+
+      // navigate(`/api/v1/adverts/${ad.id}`);
+    } catch (error) {
+      setError(error);
     }
-
-    //TODO poner un try
-    ad = await getForm(adNew);
-    // setIsLoading(true);
-    setIsCreateAd(false);
-    setShowModal(true);
-
-    // navigate(`/api/v1/adverts/${ad.id}`);
   };
 
-  //TODO terminar de poner label
   return (
     <Layout title="sube un anuncio">
       {isCreateAd ? (
@@ -83,7 +91,7 @@ const AdNew = () => {
           onSubmit={handleSubmit}
           className="container-form"
           encType="multipart/form-data">
-          {/* <label className="form-label">Articulo</label> */}
+          <label className="form-label">Articulo</label>
           <input
             className="form-input"
             type="text"
@@ -115,7 +123,7 @@ const AdNew = () => {
             />
           </div>
 
-          {/* <label className="form-label">Precio</label> */}
+          <label className="form-label">Precio</label>
           <input
             className="form-input"
             type="number"
@@ -125,11 +133,11 @@ const AdNew = () => {
             required
           />
 
-          {/* <label className="form-label">Tag</label> */}
+          <label className="form-label">Tag</label>
 
           <DrawTags handleSelectChange={handleSelectChange} />
 
-          {/* <label className="form-label">img OPCIONAL:</label> */}
+          <label className="form-label-img">Img opcional</label>
           <input
             className="form-input"
             type="file"
@@ -155,6 +163,14 @@ const AdNew = () => {
           title="Anuncio"
           message={"Acabas de crear un nuevo anuncio"}
           onCancel={handleShowModal}
+        />
+      )}
+
+      {error && (
+        <ErrorModal
+          title="Error"
+          message={error.message}
+          onCancel={resetError}
         />
       )}
     </Layout>

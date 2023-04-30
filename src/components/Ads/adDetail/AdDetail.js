@@ -74,10 +74,11 @@ const AdDetail = () => {
               )}
             </span>
 
-            <span className="span">{ad.tags.join(", ")}</span>
+            <span className="span tags">{ad.tags.join(", ")}</span>
 
             {showModal ? (
               <Button
+                className="delete-button"
                 variant="primary2"
                 width="button-form"
                 onClick={handleButton}
@@ -97,7 +98,7 @@ const AdDetail = () => {
           {showDeleteMessage && (
             <ErrorModal
               title="Borrar Anuncio"
-              message={"Fue eliminado correctamenete"}
+              message={"Fue eliminado correctamente"}
               onCancel={handleDeleteMessage}
             />
           )}
