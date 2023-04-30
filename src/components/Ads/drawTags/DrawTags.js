@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { getTags } from "./service";
+import { getTags } from "../service";
 import "./DrawTags.css";
 
 const DrawTags = props => {

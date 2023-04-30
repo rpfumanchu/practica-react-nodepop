@@ -5,7 +5,7 @@ import { useState } from "react";
 import { getForm } from "../service";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../shared/spinner/Spinner";
-import DrawTags from "../DrawTags";
+import DrawTags from "../drawTags/DrawTags";
 import ErrorModal from "../../shared/modal/ErrorModal";
 
 let ad = {};

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Spinner from "../../shared/spinner/Spinner";
 import EmptyAdList from "../emptyAdList/EmptyAdList";
 import ErrorModal from "../../shared/modal/ErrorModal";
-import DrawTags from "../DrawTags";
+import DrawTags from "../drawTags/DrawTags";
 
 const AdsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
