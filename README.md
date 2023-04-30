@@ -1,4 +1,4 @@
-# Práctica Wallapor-React
+# Práctica NodePop-React
 
 # Usuario por defecto rober@gmail.com contraseña 123123
 
