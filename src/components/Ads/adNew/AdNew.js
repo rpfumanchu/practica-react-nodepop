@@ -82,6 +82,9 @@ const AdNew = () => {
     }
   };
 
+  const buttonDisabled =
+    !formData.name || !formData.price || !formData.tags || !formData.sale;
+
   return (
     <Layout title="sube un anuncio">
       {isCreateAd ? (
@@ -151,8 +154,7 @@ const AdNew = () => {
             type="submit"
             variant="primary"
             width="button-form"
-            // disabled={buttonDisabled}>
-          >
+            disabled={buttonDisabled}>
             Crear
           </Button>
         </form>
