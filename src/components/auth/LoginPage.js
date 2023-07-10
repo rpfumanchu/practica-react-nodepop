@@ -29,10 +29,19 @@ function LoginPage() {
   };
 
   const handleChange = event => {
-    setCredentials({
-      ...credentials,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value, type, checked } = event.target;
+
+    if (type === "checkbox") {
+      setCredentials(prevCredentials => ({
+        ...prevCredentials,
+        [name]: checked,
+      }));
+    } else {
+      setCredentials(prevCredentials => ({
+        ...prevCredentials,
+        [name]: value,
+      }));
+    }
   };
 
   const handleShowModal = () => {
@@ -96,7 +105,7 @@ function LoginPage() {
               <input
                 type="checkbox"
                 name="rememberMe"
-                value={credentials.rememberMe}
+                checked={credentials.rememberMe}
                 onChange={handleChange}
               />
             </label>
