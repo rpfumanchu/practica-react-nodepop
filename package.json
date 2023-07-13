@@ -19,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy:aws": "set REACT_APP_API_BASE_URL=http://100.26.97.7&& npm run build"
   },
   "eslintConfig": {
     "extends": [
